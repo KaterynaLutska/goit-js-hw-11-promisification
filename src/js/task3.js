@@ -6,19 +6,18 @@ const randomIntegerFromInterval = (min, max) => {
 };
 
 const makeTransaction = (transaction) => {
-  transaction.delay = randomIntegerFromInterval(200, 500);
-  const { id, delay, ...rest } = transaction;
-  console.log(id, delay);
+  transaction.time = randomIntegerFromInterval(200, 500);
+  const { id, time, ...rest } = transaction;
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       const canProcess = Math.random() > 0.3;
 
       if (canProcess) {
-        resolve(id);
+        resolve(transaction);
       } else {
-        reject(id);
+        reject(transaction);
       }
-    }, delay);
+    }, time);
   });
   return promise;
 };
