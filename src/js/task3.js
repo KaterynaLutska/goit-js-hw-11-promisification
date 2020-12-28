@@ -6,16 +6,18 @@ const randomIntegerFromInterval = (min, max) => {
 };
 
 const makeTransaction = (transaction) => {
-  transaction.time = randomIntegerFromInterval(200, 500);
-  const { id, delay } = transaction;
+  const obj = transaction; // створюю об'єкт ідентичний параментру функції
+  obj.time = randomIntegerFromInterval(200, 500); // додаю до нього ключ з назвою тайм і значенням
+  const { id, delay } = obj; // деструктуризую об'єкт і передаю його як параметр в функцію проміса. Але я не розумію, як ключ time міняється на ключ delay. Чому наприклад не amount змінюється на time.
+
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       const canProcess = Math.random() > 0.3;
 
       if (canProcess) {
-        resolve(transaction);
+        resolve(obj);
       } else {
-        reject(transaction);
+        reject(obj);
       }
     }, delay);
   });
